@@ -25,13 +25,13 @@ module.exports = function(app) {
 
         link = $(element).children(".image-link").attr("href");
 
-        story = $(element).children(".standfirst").children(".standfirst-text").text().trim();
+        brief = $(element).children(".standfirst").children(".standfirst-text").text().trim();
 
         if(heading && link && story) {
           result.push({
             heading: heading,
             link: link,
-            story: story
+            brief: brief
           });
         }
 
