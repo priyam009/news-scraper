@@ -10,7 +10,9 @@ module.exports = function(app) {
 
     var query = ["https://www.news.com.au/", "https://www.news.com.au/world", "https://www.news.com.au/technology", "https://www.news.com.au/sport", "https://www.news.com.au/finance", "https://www.news.com.au/entertainment"]
 
-    axios.get(query[3]).then(function(response) {
+    var count = Math.floor(Math.random() * 6)
+
+    axios.get(query[count]).then(function(response) {
 
       var $ = cheerio.load(response.data);
       
