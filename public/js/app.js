@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  initPage();
   $("#scrape-new-articles").on("click", scrapeArticles);
 
   $("#clear-articles").on("click", clearArticles);
@@ -31,15 +30,14 @@ $(document).ready(function() {
     }).then(function(data) {
       console.log(data);
 
-      if (data.length === 0) {
         $(".news-articles").empty();
-      } else {
+
         for (var i = 0; i < data.length; i++) {
           var title = "<h5 class='card-title'>" + data[i].title + "</h5>";
           var brief = "<p class='card-text'>" + data[i].brief + "</p>";
 
           var link = $(
-            "<a class='text-dark' href=" + data[i].link + ">"
+            "<a target='_blank' class='text-dark' href=" + data[i].link + ">"
           ).append(title, brief);
 
           var button =
@@ -54,7 +52,7 @@ $(document).ready(function() {
           var card = $("<div class='card mb-4'>").append(cardBody);
 
           $(".news-articles").append(card);
-        }
+
       }
     });
   }
