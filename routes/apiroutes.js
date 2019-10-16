@@ -6,19 +6,6 @@ var axios = require("axios");
 var db = require("../models/");
 
 module.exports = function(app) {
-  //Render home page
-  app.get("/", function(req, res) {
-    //Find all articles in db
-    db.Article.find({})
-      .then(function(dbArticle) {
-        // res.json(dbArticle);
-        res.render("index", { articles: dbArticle });
-      })
-      .catch(function(err) {
-        res.json(err);
-      });
-    //Render index page
-  });
 
   //Get all articles
   app.get("/articles", function(req, res) {
