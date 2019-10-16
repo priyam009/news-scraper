@@ -34,48 +34,49 @@ module.exports = function(app) {
 
   //Scrape new articles
   app.get("/scrape", function(req, res) {
+    db.Article.remove().then(function() {
+      //Scrape articles from news.com.au
+      axios.get("https://www.news.com.au/").then(function(response) {
+        var $ = cheerio.load(response.data);
 
-    //Scrape articles from news.com.au
-    axios.get("https://www.news.com.au/").then(function(response) {
-      var $ = cheerio.load(response.data);
+        var result = [];
 
-      var result = [];
+        $(".story-block").each(function(i, element) {
+          title = $(element)
+            .children(".heading")
+            .children("a")
+            .text();
 
-      $(".story-block").each(function(i, element) {
-        title = $(element)
-          .children(".heading")
-          .children("a")
-          .text();
+          link = $(element)
+            .children(".image-link")
+            .attr("href");
 
-        link = $(element)
-          .children(".image-link")
-          .attr("href");
+          brief = $(element)
+            .children(".standfirst")
+            .children(".standfirst-text")
+            .text()
+            .trim();
 
-        brief = $(element)
-          .children(".standfirst")
-          .children(".standfirst-text")
-          .text()
-          .trim();
-
-        //Push articles in results array if it has valid title, link and brief
-        if (title && link && brief) {
-          result.push({
-            title: title,
-            link: link,
-            brief: brief
-          });
-        }
-        console.log("result", result);
-      });
-
-      //Create Articles in db
-      db.Article.create(result)
-        .then(function() {
-          res.json(true);
-        })
-        .catch(function(err) {
-          console.log(err);
+          //Push articles in results array if it has valid title, link and brief
+          if (title && link && brief) {
+            result.push({
+              title: title,
+              link: link,
+              brief: brief
+            });
+          }
+          console.log("result", result);
         });
+
+        //Create Articles in db
+        db.Article.create(result)
+          .then(function() {
+            res.json(true);
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      });
     });
   });
 
