@@ -34,4 +34,23 @@
 </div>
 
 <div class="container news-articles">
+  {{#each articles}}
+  <div class="card mb-4">
+    <div class="card-body">
+      <a target="_blank" class="text-dark" href="{{this.link}}">
+        <h5 class="card-title">{{this.title}}</h5>
+        <p class="card-text">{{this.brief}}</p>
+      </a>
+      <a class="btn btn-primary text-light mt-3" data-id="{{this._id}}">Save Article</a>
+    </div>
+  </div>
+  {{/each}}
+  {{#unless articles.length}}
+  <div class="card alert-danger">
+    <div class="card-body text-center text-dark font-weight-bold">
+      <p class="card-text alert-heading">Oh no!! No new articles found.</p>
+      <p class="card-text alert-heading">Click Scrape to get Articles</p>
+    </div>
+  </div>
+  {{/unless}}
 </div>
