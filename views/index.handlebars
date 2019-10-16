@@ -1,3 +1,4 @@
+{{!-- Navbar --}}
 <nav class="navbar navbar-expand-lg navbar-light">
   <a class="navbar-brand heading" href="#">News Scraper</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -6,8 +7,8 @@
   </button>
   <div class="collapse navbar-collapse d-flex justify-content-lg-end justify-content-md-start">
     <div class="navbar-nav">
-      <a class="nav-item nav-link pr-5" href="#">Scrape New Articles</a>
-      <a class="nav-item nav-link" href="#">Clear Articles</a>
+      <a id="scrape-new-articles" class="nav-item nav-link pr-5">Scrape New Articles</a>
+      <a id="clear-articles" class="nav-item nav-link">Clear Articles</a>
     </div>
   </div>
   <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
@@ -18,6 +19,7 @@
   </div>
 </nav>
 
+{{!-- Heading --}}
 <div class="tag-line container-fluid d-flex justify-content-center align-items-center">
   <div class="content">
     <div class="content_container">
@@ -29,4 +31,7 @@
       </ul>
     </div>
   </div>
+</div>
+
+<div class="container news-articles">
 </div>
