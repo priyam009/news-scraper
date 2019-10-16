@@ -8,6 +8,10 @@ body {
   font-size: 25px;
 }
 
+a:hover {
+  cursor:pointer;
+ }
+
 .tag-line {
   position: absolute;
   height: 150px;
@@ -142,4 +146,8 @@ body {
     -webkit-transform: translate3d(0, -75%, 0);
     transform: translate3d(0, -75%, 0);
   }
+}
+
+.news-articles {
+  margin-top: 200px;
 }
