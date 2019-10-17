@@ -9,10 +9,22 @@ module.exports = function(app) {
   //Render home page
   app.get("/", function(req, res) {
     //Find all articles in db
-    db.Article.find({})
+    db.Article.find({ saved: false })
       .then(function(dbArticle) {
         // res.json(dbArticle);
         res.render("index", { articles: dbArticle });
+      })
+      .catch(function(err) {
+        res.json(err);
+      });
+  });
+
+  app.get("/bookmark", function(req, res) {
+    //Find all articles in db
+    db.Article.find({ saved: true })
+      .then(function(dbArticle) {
+        // res.json(dbArticle);
+        res.render("bookmark", { articles: dbArticle });
       })
       .catch(function(err) {
         res.json(err);
