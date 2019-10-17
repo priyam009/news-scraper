@@ -85,4 +85,14 @@ module.exports = function(app) {
       res.json(true);
     });
   });
+
+  app.put("/bookmark/:id", function(req, res) {
+    // console.log("id", req.params.id);
+    var id = req.params.id;
+
+    db.Article.findOneAndUpdate({_id: id}, {saved: true}, function(result) {
+      // console.log(result);
+      res.json(true);
+    })
+  })
 };
