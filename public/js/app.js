@@ -54,8 +54,19 @@ $(document).ready(function() {
           var card = $("<div class='card mb-4'>").append(cardBody);
 
           $(".news-articles").append(card);
-
       }
     });
+  }
+
+  function saveArticle() {
+    var id = $(this).attr("data-id")
+    console.log("id", id);
+
+    $.append({
+      method: "PUT",
+      url: "/bookmark/" + id
+    }).then(function(data) {
+      console.log(data)
+    })
   }
 });
