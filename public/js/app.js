@@ -60,14 +60,14 @@ $(document).ready(function() {
   }
 
   function saveArticle() {
-    var id = $(this).attr("data-id")
+    var id = $(this).attr("data-id");
     console.log("id", id);
 
-    $.append({
+    $.ajax({
       method: "PUT",
       url: "/bookmark/" + id
-    }).then(function(data) {
-      console.log(data)
+    }).then(function() {
+      initPage();
     })
   }
 });
