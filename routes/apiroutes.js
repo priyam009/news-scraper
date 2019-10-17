@@ -6,11 +6,22 @@ var axios = require("axios");
 var db = require("../models/");
 
 module.exports = function(app) {
-
   //Get all articles
   app.get("/articles", function(req, res) {
     //Find all articles in db
-    db.Article.find({})
+    db.Article.find({ saved: false })
+      .then(function(dbArticle) {
+        res.json(dbArticle);
+      })
+      .catch(function(err) {
+        res.json(err);
+      });
+  });
+
+  //Get saved articles
+  app.get("/saved", function(req, res) {
+    //Find all articles in db
+    db.Article.find({ saved: true })
       .then(function(dbArticle) {
         res.json(dbArticle);
       })
