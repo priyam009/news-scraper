@@ -1,0 +1,56 @@
+{{!-- Navbar --}}
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand heading" href="/">News Scraper</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse d-flex justify-content-lg-end justify-content-md-start">
+    <div class="navbar-nav">
+      <a id="scrape-new-articles" class="nav-item nav-link pr-5">Scrape Articles</a>
+      <a id="clear-articles" class="nav-item nav-link">Clear Articles</a>
+    </div>
+  </div>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active pr-5" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/bookmark">Bookmarks</a>
+    </div>
+  </div>
+</nav>
+
+{{!-- Heading --}}
+<div class="tag-line container-fluid d-flex justify-content-center align-items-center">
+  <div class="content">
+    <div class="content_container">
+      <ul class="content_container_list">
+        <li class="content_container_list_item">Scrape It!</li>
+        <li class="content_container_list_item">Read It!</li>
+        <li class="content_container_list_item">Save It!</li>
+        <li class="content_container_list_item">Clear It!</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container news-articles">
+  {{#each articles}}
+  <div class="card mb-4">
+    <div class="card-body">
+      <a target="_blank" class="text-dark" href="{{this.link}}">
+        <h5 class="card-title">{{this.title}}</h5>
+        <p class="card-text">{{this.brief}}</p>
+      </a>
+      <a class="btn btn-primary text-light mt-3" data-id="{{this._id}}">Remove Article</a>
+      <a class="btn btn-primary text-light mt-3" data-id="{{this._id}}">Article Notes</a>
+    </div>
+  </div>
+  {{/each}}
+  {{#unless articles.length}}
+  <div class="card alert-danger">
+    <div class="card-body text-center text-dark font-weight-bold">
+      <p class="card-text alert-heading">No saved articles</p>
+    </div>
+  </div>
+  {{/unless}}
+</div>
