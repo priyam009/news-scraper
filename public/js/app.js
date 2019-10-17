@@ -3,6 +3,8 @@ $(document).ready(function() {
 
   $("#clear-articles").on("click", clearArticles);
 
+  $(".save-article").on("click", saveArticle);
+
   function scrapeArticles() {
     $.ajax({
       method: "GET",
