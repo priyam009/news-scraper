@@ -1,9 +1,10 @@
 $(document).ready(function() {
-  $("#scrape-new-articles").on("click", scrapeArticles);
+
+  $(document).on("click", ".save-article", saveArticle);
+  
+  $(document).on("click", "#scrape-new-articles", scrapeArticles);
 
   $("#clear-articles").on("click", clearArticles);
-
-  $(".save-article").on("click", saveArticle);
 
   function scrapeArticles() {
     $.ajax({
