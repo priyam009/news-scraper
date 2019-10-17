@@ -44,7 +44,7 @@ $(document).ready(function() {
           ).append(title, brief);
 
           var button =
-            "<a class='btn btn-primary text-light mt-3' " +
+            "<a class='btn btn-primary text-light mt-3 save-article' " +
             "data-id=" +
             data[i]._id +
             ">" +
