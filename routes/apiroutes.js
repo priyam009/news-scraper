@@ -32,7 +32,7 @@ module.exports = function(app) {
 
   //Scrape new articles
   app.get("/scrape", function(req, res) {
-    db.Article.remove().then(function() {
+    db.Article.remove({ saved: false }).then(function() {
       //Scrape articles from news.com.au
       axios.get("https://www.news.com.au/").then(function(response) {
         var $ = cheerio.load(response.data);
@@ -63,7 +63,6 @@ module.exports = function(app) {
               brief: brief
             });
           }
-          console.log("result", result);
         });
 
         //Create Articles in db
@@ -90,9 +89,13 @@ module.exports = function(app) {
     // console.log("id", req.params.id);
     var id = req.params.id;
 
-    db.Article.findOneAndUpdate({_id: id}, {saved: true}, function(result) {
-      // console.log(result);
-      res.json(true);
-    })
-  })
+    db.Article.findOneAndUpdate(
+      { _id: id },
+      { saved: req.body.saved },
+      function(result) {
+        // console.log(result);
+        res.json(true);
+      }
+    );
+  });
 };
