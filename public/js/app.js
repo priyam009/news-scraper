@@ -1,7 +1,8 @@
 $(document).ready(function() {
-
   $(document).on("click", ".save-article", saveArticle);
-  
+
+  $(document).on("click", ".remove-article", removeArticle);
+
   $(document).on("click", "#scrape-new-articles", scrapeArticles);
 
   $("#clear-articles").on("click", clearArticles);
