@@ -98,4 +98,44 @@ module.exports = function(app) {
       }
     );
   });
+
+  app.get("/saved/:id", function(req, res) {
+    db.Article.findOne({ _id: req.params.id })
+      .populate("note")
+      .then(function(dbNote) {
+        res.json(dbNote);
+      });
+  });
+
+  app.post("/saved/:id", function(req, res) {
+    db.Note.create(req.body)
+      .then(function(dbNote) {
+        return db.Article.findOneAndUpdate(
+          { _id: req.params.id },
+          { $push: { note: dbNote._id } }
+        );
+      }, { new: true })
+      .then(function(dbArticle) {
+        console.log("this", dbArticle);
+        res.json(dbArticle);
+      });
+  });
+
+  app.get("/notes", function(req, res) {
+    db.Note.find({})
+    .then(function(dbNote) {
+      res.json(dbNote);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+  })
+
+    // Delete note
+    app.get("/note/delete/:id", function(req, res) {
+      // Remove all articles from the db
+      db.Note.remove({_id: req.params.id}).then(function() {
+        res.json(true);
+      });
+    });
 };
