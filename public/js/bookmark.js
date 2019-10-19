@@ -111,6 +111,7 @@ $(document).ready(function() {
     });
   }
 
+  //Initialise Bookmark page
   function initBookmark() {
     $.ajax({
       method: "GET",
@@ -120,6 +121,7 @@ $(document).ready(function() {
 
       $(".news-articles").empty();
 
+      //Check if Bookmark exists
       if (data.length === 0) {
         renderEmptyBookmark();
       } else {
@@ -128,6 +130,7 @@ $(document).ready(function() {
     });
   }
 
+  //Render if no bookmark
   function renderEmptyBookmark() {
     var alertHeading1 = $(
       "<p class='card-text alert-heading'>Oh no!! No saved articles found.</p>"
@@ -145,6 +148,7 @@ $(document).ready(function() {
     $(".news-articles").append(alert);
   }
 
+  //Render Bookmark
   function renderBookmark(data) {
     for (var i = 0; i < data.length; i++) {
       var title = "<h5 class='card-title'>" + data[i].title + "</h5>";
@@ -180,6 +184,7 @@ $(document).ready(function() {
     }
   }
 
+  //Remove article
   function removeArticle() {
     var id = $(this).attr("data-id");
     var data = {
